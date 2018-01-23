@@ -28,6 +28,10 @@ public class Cdc implements Serializable{
     @Column(name="action_description")
     private String action;
 
+    @Column(name="cdc_date",nullable=false)
+    @Convert(converter = LocalDateTimeConverter.class)
+    private LocalDateTime cdc_date;
+
     @Column(name="db_date",nullable=false)
     @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime db_date;
@@ -94,5 +98,14 @@ public class Cdc implements Serializable{
 
     public void setProcessed_to_cache(LocalDateTime processed_to_cache) {
         this.processed_to_cache = processed_to_cache;
+    }
+
+
+    public LocalDateTime getCdc_date() {
+        return cdc_date;
+    }
+
+    public void setCdc_date(LocalDateTime cdc_date) {
+        this.cdc_date = cdc_date;
     }
 }
