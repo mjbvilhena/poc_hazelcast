@@ -25,7 +25,6 @@ public class VehiclesMapStore implements MapStore<Long, Vehicle>{
     @Autowired
     public VehiclesMapStore(VehicleRepository vehicleRepository){
         this.vehicleRepository = vehicleRepository;
-
     }
 
     @Override
