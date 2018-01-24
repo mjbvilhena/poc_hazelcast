@@ -1,6 +1,5 @@
 package com.example.hazelcast.client.dataLoader;
 
-import com.example.hazelcast.client.repository.CdcRepository;
 import com.example.hazelcast.client.repository.VehicleRepositoryClient;
 
 import com.example.hazelcast.shared.model.Cdc;
@@ -21,22 +20,19 @@ import java.time.LocalDateTime;
 public class InitialDataLoader implements ApplicationRunner {
 
     private VehicleRepositoryClient vehicleRepositoryClient;
-    private CdcRepository cdcRepository;
     private static Vehicle vehicle;
     private static VehicleDetails vehicleDetails;
-    private static Cdc cdc;
     private static LocalDateTime currentDate = LocalDateTime.now();
 
     @Autowired
-    public InitialDataLoader(VehicleRepositoryClient vehicleRepositoryClient, CdcRepository cdcRepository) {
+    public InitialDataLoader(VehicleRepositoryClient vehicleRepositoryClient) {
         this.vehicleRepositoryClient = vehicleRepositoryClient;
-        this.cdcRepository = cdcRepository;
     }
 
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
-        //clearObject(vehicleRepository);
-        //populateVehicle(vehicleRepository);
+        //clearObject(vehicleRepositoryClient);
+        //populateVehicle(vehicleRepositoryClient);
 
     }
 
@@ -57,12 +53,14 @@ public class InitialDataLoader implements ApplicationRunner {
         vehicle = new Vehicle(currentDate, new VehicleDetails("0","Red","Volvo"));
         vehicleRepositoryClient.save(vehicle);
 
+        vehicle = new Vehicle(currentDate, new VehicleDetails("1","Purple","Kia"));
+        vehicleRepositoryClient.save(vehicle);
+
     }
 
     public static void clearObject(VehicleRepositoryClient vehicleRepositoryClient){
         vehicle = new Vehicle();
         vehicleDetails = new VehicleDetails();
-
     }
 
 }

@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EntityScan("com.example.hazelcast.shared.model")
 @Configuration
-@EnableScheduling
+//@EnableScheduling
 public class ClientApplication {
 
 	public static void main(String[] args) {

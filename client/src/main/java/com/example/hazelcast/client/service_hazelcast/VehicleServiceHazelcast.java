@@ -39,7 +39,6 @@ public class VehicleServiceHazelcast implements MapNames {
     @PostConstruct
     public void init(){
        vehiclesMap = hazelcastInstance.getMap(VIHICLES_MAP);//populated from storege Node App
-       //populateMapFromDb();
     }
 
     /*actions*/
@@ -54,17 +53,17 @@ public class VehicleServiceHazelcast implements MapNames {
 
     /*populating MAP with DB values*/
     //@Scheduled(cron = "*/2 * * * * *")//every 2 seconds
-    @Scheduled(cron = "* */5 * * * *")//every 2 seconds
-    public void populateMapFromDb(){
-        System.out.println("### RUNNING SCHEDULED JOB ###");
-
-        vehiclesMap = hazelcastInstance.getMap(VIHICLES_MAP);
-        List<Vehicle> vehicles = vehicleServiceClient.listAll();
-        for (Vehicle vehicle : vehicles){
-            Long key = vehicle.getVehicleId();
-            vehiclesMap.put(key, vehicle);
-        }
-        System.out.println("### HAZELCAST MAP POPULATED FROM DATABASE ###");
-    }
+//    @Scheduled(cron = "* */5 * * * *")//every 2 seconds
+//    public void populateMapFromDb(){
+//        System.out.println("### RUNNING SCHEDULED JOB ###");
+//
+//        vehiclesMap = hazelcastInstance.getMap(VIHICLES_MAP);
+//        List<Vehicle> vehicles = vehicleServiceClient.listAll();
+//        for (Vehicle vehicle : vehicles){
+//            Long key = vehicle.getVehicleId();
+//            vehiclesMap.put(key, vehicle);
+//        }
+//        System.out.println("### HAZELCAST MAP POPULATED FROM DATABASE ###");
+//    }
 
 }
