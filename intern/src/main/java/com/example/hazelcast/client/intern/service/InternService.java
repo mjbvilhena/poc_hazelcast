@@ -8,9 +8,11 @@ import com.example.hazelcast.shared.model.Vehicle;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +31,19 @@ public class InternService implements MapNames{
     @Autowired
     VehicleRepositoryIntern vehicleRepositoryIntern;
 
+    @Autowired
+    public InternService(@Qualifier("InternInstance")HazelcastInstance hazelcastInstance){
+        this.hazelcastInstance = hazelcastInstance;
+    }
+
+    @PostConstruct
+    public void init(){
+        vehiclesMap = hazelcastInstance.getMap(VIHICLES_MAP);//populated from storege Node App
+    }
+
     /*populating MAP with DB values*/
     //@Scheduled(cron = "*/2 * * * * *")//every 2 seconds
- //   @Scheduled(cron = "* */1 * * * *")//every 2 seconds
+    @Scheduled(cron = "* */5 * * * *")//every 2 seconds
     public void populateMapFromDb(){
         System.out.println("### RUNNING SCHEDULED JOB Getting CDC Data ###");
 

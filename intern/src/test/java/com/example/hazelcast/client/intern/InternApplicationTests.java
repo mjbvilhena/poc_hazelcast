@@ -37,7 +37,7 @@ public class InternApplicationTests {
 	@Test
 	public void insertVehicleData() {
 
-	    vehicle = new Vehicle(currentDate, new VehicleDetails("0","Yellow-black","TestInsert2"));
+	    vehicle = new Vehicle(currentDate, new VehicleDetails("0","JJJJ","SASTEAM"));
 		vehicleRepositoryIntern.save(vehicle);
 
         Vehicle vehicleFound = vehicleRepositoryIntern.findOne(vehicle.getVehicleId());
@@ -50,7 +50,7 @@ public class InternApplicationTests {
 	    List<Vehicle> list = vehicleRepositoryIntern.findAll();
 	    Long idVehicle = null;
 	    for(Vehicle v : list){
-	        vehicleDetails = new VehicleDetails("1","COLOUR-UPDATE","TestUpdate");
+	        vehicleDetails = new VehicleDetails("1","TESTE456","AGORAVAI");
 	        vehicleDetails.setVehicle(v);
             v.setVehicleDetails(vehicleDetails);
             vehicleRepositoryIntern.save(v);
@@ -58,9 +58,9 @@ public class InternApplicationTests {
 	        break;
         }
         Vehicle vehicle = vehicleRepositoryIntern.findOne(idVehicle);
-        Assert.assertEquals(vehicle.getVehicleDetails().getColour(), "COLOUR-UPDATE");
+        Assert.assertEquals(vehicle.getVehicleDetails().getColour(), "TESTE");
 
-    }
+   }
 
 
 }
