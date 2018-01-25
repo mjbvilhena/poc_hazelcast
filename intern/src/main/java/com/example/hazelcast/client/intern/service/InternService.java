@@ -38,7 +38,8 @@ public class InternService implements MapNames{
 
     @PostConstruct
     public void init(){
-        vehiclesMap = hazelcastInstance.getMap(VIHICLES_MAP);//populated from storege Node App
+        //populated from storege Node App
+        vehiclesMap = hazelcastInstance.getMap(VIHICLES_MAP);
     }
 
     /*populating MAP with DB values*/
