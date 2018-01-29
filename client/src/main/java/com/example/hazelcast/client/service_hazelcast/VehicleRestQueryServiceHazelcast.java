@@ -7,32 +7,26 @@ import com.example.hazelcast.shared.map.MapNames;
 import com.example.hazelcast.shared.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import com.example.hazelcast.client.service.VehicleServiceClient;
+import com.example.hazelcast.client.service.VehicleRestQueryServiceClient;
 
 import javax.annotation.PostConstruct;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by netof on 18/01/2018.
  */
 @Service
-public class VehicleServiceHazelcast implements MapNames {
+public class VehicleRestQueryServiceHazelcast implements MapNames {
 
     private HazelcastInstance hazelcastInstance;
     private IMap<Long, Vehicle> vehiclesMap;
 
     @Autowired
-    VehicleServiceClient vehicleServiceClient;
+    VehicleRestQueryServiceClient vehicleRestQueryServiceClient;
 
     @Autowired
-    public VehicleServiceHazelcast(@Qualifier("ClientInstance")HazelcastInstance hazelcastInstance){
+    public VehicleRestQueryServiceHazelcast(@Qualifier("ClientInstance")HazelcastInstance hazelcastInstance){
         this.hazelcastInstance = hazelcastInstance;
     }
 
