@@ -32,7 +32,8 @@ public class VehicleRestQueryServiceHazelcast implements MapNames {
 
     @PostConstruct
     public void init(){
-       vehiclesMap = hazelcastInstance.getMap(VIHICLES_MAP);//populated from storege Node App
+        vehiclesMap = hazelcastInstance.getMap(VIHICLES_MAP);//populated from storege Node App
+        vehiclesMap.addIndex("registrationDate",true);//add index by registrationDate
     }
 
     /*actions*/

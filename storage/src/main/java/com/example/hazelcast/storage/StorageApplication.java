@@ -2,6 +2,7 @@ package com.example.hazelcast.storage;
 
 import com.example.hazelcast.storage.storage.VehiclesMapStore;
 import com.hazelcast.config.MapConfig;
+import com.hazelcast.config.MapIndexConfig;
 import com.hazelcast.config.MapStoreConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
@@ -38,6 +39,9 @@ public class StorageApplication {
         vehicleMapStoreConfig.setWriteDelaySeconds(2);
 		vehicleMapConfig.setMapStoreConfig(vehicleMapStoreConfig);
 		vehicleMapConfig.setName("vehicles");
+
+		MapIndexConfig fieldIndex = new MapIndexConfig("registrationDate",true);
+		vehicleMapConfig.addMapIndexConfig(fieldIndex);
 
 		//add vehicles com.example.hazelcast.shared.map config to storage config
 		config.addMapConfig(vehicleMapConfig);

@@ -43,8 +43,8 @@ public class InternService implements MapNames{
     }
 
     /*populating MAP with DB values*/
-    //@Scheduled(cron = "*/2 * * * * *")//every 2 seconds
-    @Scheduled(cron = "* */5 * * * *")//every 2 seconds
+    @Scheduled(cron = "*/50 * * * * *")//every 2 seconds
+    //@Scheduled(cron = "* */5 * * * *")//every 2 seconds
     public void populateMapFromDb(){
         System.out.println("### RUNNING SCHEDULED JOB Getting CDC Data ###");
 
