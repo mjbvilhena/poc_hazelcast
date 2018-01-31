@@ -1,7 +1,6 @@
 package com.example.hazelcast.client.controller;
 
 import com.example.hazelcast.client.service.VehicleRestCommandServiceClient;
-import com.example.hazelcast.client.service.VehicleRestQueryServiceClient;
 import com.example.hazelcast.shared.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

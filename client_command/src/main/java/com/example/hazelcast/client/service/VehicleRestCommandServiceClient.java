@@ -19,9 +19,6 @@ public class VehicleRestCommandServiceClient {
     @Autowired
     private VehicleRepositoryClient vehicleRepositoryClient;
 
-    @Autowired
-    private VehicleRestQueryServiceClient vehicleRestQueryServiceClient;
-
 
     /*If for some reason the names are not available (ex: no debug information),
      the parameter names are also available under the p<#arg> where #arg stands for the parameter index (starting from 0).
@@ -54,7 +51,7 @@ public class VehicleRestCommandServiceClient {
     private boolean exist(Vehicle vehicle){
         boolean exist = false;
         try {
-            if(vehicleRestQueryServiceClient.findById(vehicle.getVehicleId()) != null){
+            if(vehicleRepositoryClient.findOne(vehicle.getVehicleId()) != null){
                 exist  = true;
             };
         } catch (Exception e) {
