@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class InternService implements MapNames{
     }
 
     /*populating MAP with DB values*/
-    @Scheduled(cron = "*/50 * * * * *")//every 2 seconds
+    @Scheduled(cron = "*/55 * * * * *")//every 2 seconds
     //@Scheduled(cron = "* */5 * * * *")//every 2 seconds
     public void populateMapFromDb(){
         System.out.println("### RUNNING SCHEDULED JOB Getting CDC Data ###");
@@ -51,14 +52,23 @@ public class InternService implements MapNames{
         vehiclesMap = hazelcastInstance.getMap(VIHICLES_MAP);
         List<Cdc> list = cdcRepository.findAll();
         for (Cdc cdc : list){
-            if(cdc.getAction().equals("UPDATE") || cdc.getAction().equals("INSERT") || cdc.getAction().equals("DELETE")){
+            if(cdc.getProcessed_to_cache() == null){
                 Long key = cdc.getVehicle();
-                Vehicle vehicle = vehicleRepositoryIntern.findOne(key);
-                vehiclesMap.put(key, vehicle);
+                if(cdc.getAction().equals("UPDATE") || cdc.getAction().equals("INSERT")){
+                    Vehicle vehicle = vehicleRepositoryIntern.findOne(key);
+                    if(vehicle != null){
+                        vehiclesMap.put(key, vehicle);
+                        cdc.setProcessed_to_cache(LocalDateTime.now());
+                        cdcRepository.save(cdc);
+                    }
+                }else if(cdc.getAction().equals("DELETE")){
+                    vehiclesMap.delete(key);
+                    cdc.setProcessed_to_cache(LocalDateTime.now());
+                    cdcRepository.save(cdc);
+                }
             }
         }
         System.out.println("### HAZELCAST MAP POPULATED FROM DATABASE ###");
     }
-
 
 }
