@@ -39,14 +39,14 @@ public class VehicleRestCommandServiceClient {
         vehicleRepositoryClient.delete(vehicleId);
     }
 
-    //    @CachePut(value="vehiclesCache",key="#p0")
-//    public Vehicle save(Vehicle vehicle) throws Exception{
-//        if(exist(vehicle)){
-//            throw new Exception("Vehicle alrady in Database!!!");
-//        }else{
-//            return vehicleRepository.save(vehicle);
-//        }
-//    }
+    @CachePut(value="vehiclesCache",key="#p0")
+    public Vehicle save(Vehicle vehicle) throws Exception{
+        if(exist(vehicle)){
+            throw new Exception("Vehicle alrady in Database!!!");
+        }else{
+            return vehicleRepositoryClient.save(vehicle);
+        }
+    }
 
     private boolean exist(Vehicle vehicle){
         boolean exist = false;

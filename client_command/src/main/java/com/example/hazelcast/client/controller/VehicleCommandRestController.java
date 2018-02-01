@@ -5,6 +5,10 @@ import com.example.hazelcast.shared.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
 
 /**
  * Created by netof on 29/01/2018.
@@ -28,12 +32,12 @@ public class VehicleCommandRestController {
         return ResponseEntity.noContent().build();
     }
 
-//    @PostMapping
-//    public ResponseEntity<Void> save(@Valid @RequestBody Vehicle vehicle) throws Exception {
-//        vehicle = vehicleService.save(vehicle);
-//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-//                .path("/{vehicleId}").buildAndExpand(vehicle.getId()).toUri();
-//
-//        return ResponseEntity.created(uri).build();
-//    }
+    @PostMapping
+    public ResponseEntity<Void> save(@Valid @RequestBody Vehicle vehicle) throws Exception {
+        vehicle = vehicleRestCommandServiceClient.save(vehicle);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{vehicleId}").buildAndExpand(vehicle.getVehicleId()).toUri();
+
+        return ResponseEntity.created(uri).build();
+    }
 }

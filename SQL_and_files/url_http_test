@@ -4,4 +4,15 @@ GET - http://localhost:8089/api/vehicles
 GET - http://localhost:8088/api/vehicles/vehicle/ID
 PUT - http://localhost:8088/api/vehicles/vehicle/ID
 DELETE - http://localhost:8088/api/vehicles/vehicle/ID
-POST -
+
+
+POST - http://localhost:8088/api/vehicles/
+
+  {
+        "registrationDate": "17/01/2018 14:57",
+        "vehicleDetails": {
+            "vehicleStatus": "1",
+            "colour": "WHITE",
+            "model": "KIA"
+        }
+    }
