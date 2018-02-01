@@ -22,7 +22,7 @@ public class VehicleRestCommandServiceHazelcast implements MapNames {
     private IMap<Long, Vehicle> vehiclesMap;
 
     @Autowired
-    public VehicleRestCommandServiceHazelcast(@Qualifier("ClientInstance")HazelcastInstance hazelcastInstance){
+    public VehicleRestCommandServiceHazelcast(@Qualifier("ClientCommandInstance")HazelcastInstance hazelcastInstance){
         this.hazelcastInstance = hazelcastInstance;
     }
 

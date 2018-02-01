@@ -9,16 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EntityScan("com.example.hazelcast.shared.model")
 @Configuration
 //@EnableScheduling
-public class ClientApplication {
+public class ClientCommandApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ClientApplication.class, args);
+		SpringApplication.run(ClientCommandApplication.class, args);
 	}
 
     @Bean
@@ -29,7 +28,7 @@ public class ClientApplication {
         return clientConfig;
     }
 
-	@Bean(name = "ClientInstance", destroyMethod = "shutdown")
+	@Bean(name = "ClientCommandInstance", destroyMethod = "shutdown")
 	public HazelcastInstance createClientInstance(ClientConfig clientConfig) throws Exception{
 		return HazelcastClient.newHazelcastClient(clientConfig);
 	}
