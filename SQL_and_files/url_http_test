@@ -1,0 +1,7 @@
+## URL to test using Postman ##
+
+GET - http://localhost:8089/api/vehicles
+GET - http://localhost:8088/api/vehicles/vehicle/ID
+PUT - http://localhost:8088/api/vehicles/vehicle/ID
+DELETE - http://localhost:8088/api/vehicles/vehicle/ID
+POST -
