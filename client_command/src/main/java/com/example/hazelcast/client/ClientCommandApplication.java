@@ -38,7 +38,6 @@ public class ClientCommandApplication {
 		return HazelcastClient.newHazelcastClient(clientConfig);
 	}
 
-    @Configuration
     @EnableSwagger2
     public class SwaggerConfig {
         @Bean

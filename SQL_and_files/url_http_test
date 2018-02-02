@@ -1,3 +1,9 @@
+
+## URL to test using Swagger ##
+
+localhost:8088/swagger-ui.html
+localhost:8089/swagger-ui.html
+
 ## URL to test using Postman ##
 
 GET - http://localhost:8089/api/vehicles
