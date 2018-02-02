@@ -59,15 +59,17 @@ public class InternService implements MapNames{
                         vehiclesMap.put(key, vehicle);
                         cdc.setProcessed_to_cache(LocalDateTime.now());
                         cdcRepository.save(cdc);
+                        System.out.println("######### PUT " + key + " #########");
                     }
                 }else if(cdc.getAction().equals("DELETE")){
                     vehiclesMap.delete(key);
                     cdc.setProcessed_to_cache(LocalDateTime.now());
                     cdcRepository.save(cdc);
+                    System.out.println("######### DEL " + key + " #########");
                 }
             }
         }
-        System.out.println("### HAZELCAST MAP POPULATED FROM DATABASE ###");
+        System.out.println("### HAZELCAST MAP SYNCHRONIZED WITH DATABASE ###");
     }
 
 }
