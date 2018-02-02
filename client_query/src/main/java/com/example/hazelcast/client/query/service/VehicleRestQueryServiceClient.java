@@ -22,9 +22,9 @@ public class VehicleRestQueryServiceClient {
         return vehicleRepositoryClient.findAll();
     }
 
-    @Cacheable(value="vehiclesCache",key="#vehicletId",unless="#result==null")
-    public Vehicle findById(Long vehicletId) throws Exception {
-        Vehicle vehicle = vehicleRepositoryClient.findOne(vehicletId);
+    @Cacheable(value="vehiclesCache",key="#vehicleId",unless="#result==null")
+    public Vehicle findById(Long vehicleId) throws Exception {
+        Vehicle vehicle = vehicleRepositoryClient.findOne(vehicleId);
         if(vehicle == null){
             throw new Exception("Vehicle not found!!!");
         }

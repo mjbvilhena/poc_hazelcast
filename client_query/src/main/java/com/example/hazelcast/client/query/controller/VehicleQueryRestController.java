@@ -34,10 +34,10 @@ public class VehicleQueryRestController {
         return ResponseEntity.status(HttpStatus.OK).body(vehicleRestQueryServiceHazelcast.listAll());
     }
 
-    @GetMapping(value="/vehicle/{vehicletId}")
-    public ResponseEntity<?> getVehicleByRegistrationNumber(@PathVariable("vehicletId")Long vehicletId) throws Exception {
-       // Vehicle vehicle = vehicleService.findById(vehicletId);
-        Collection<Vehicle> vehicle = vehicleRestQueryServiceHazelcast.findById(vehicletId);
+    @GetMapping(value="/vehicle/{vehicleId}")
+    public ResponseEntity<?> getVehicleByRegistrationNumber(@PathVariable("vehicleId")Long vehicleId) throws Exception {
+       // Vehicle vehicle = vehicleService.findById(vehicleId);
+        Collection<Vehicle> vehicle = vehicleRestQueryServiceHazelcast.findById(vehicleId);
         return ResponseEntity.status(HttpStatus.OK).body(vehicle);
     }
 

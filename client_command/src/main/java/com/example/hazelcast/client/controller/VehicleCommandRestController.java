@@ -20,14 +20,14 @@ public class VehicleCommandRestController {
     @Autowired
     VehicleRestCommandServiceClient vehicleRestCommandServiceClient;
 
-    @DeleteMapping(value="/vehicle/{vehicletId}")
-    public ResponseEntity<Void> deleteVehicle(@PathVariable("vehicletId")Long vehicletId){
-        vehicleRestCommandServiceClient.deleteVehicle(vehicletId);
+    @DeleteMapping(value="/vehicle/{vehicleId}")
+    public ResponseEntity<Void> deleteVehicle(@PathVariable("vehicleId")Long vehicleId){
+        vehicleRestCommandServiceClient.deleteVehicle(vehicleId);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(value = "/vehicle/{vehicletId}")
-    public ResponseEntity<Void> updateVehicle(@RequestBody Vehicle vehicle, @PathVariable("vehicletId") Long vehicletId)throws Exception{
+    @PutMapping(value = "/vehicle/{vehicleId}")
+    public ResponseEntity<Void> updateVehicle(@RequestBody Vehicle vehicle, @PathVariable("vehicleId") Long vehicleId)throws Exception{
         vehicleRestCommandServiceClient.updateVehicle(vehicle);
         return ResponseEntity.noContent().build();
     }
