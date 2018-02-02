@@ -42,8 +42,6 @@ public class StorageApplication {
 		MapStoreConfig vehicleMapStoreConfig = new MapStoreConfig();
 
 		vehicleMapStoreConfig.setImplementation(vehiclesMapStore);
-        vehicleMapStoreConfig.setWriteDelaySeconds(2);
-
 
         MapConfig vehicleMapConfig = new MapConfig();
 
@@ -59,8 +57,6 @@ public class StorageApplication {
 		vehicleMapConfig.setBackupCount(2);
 
 		config.addMapConfig(vehicleMapConfig);
-
-        vehiclesMapStore.loadAllKeys();
 
 		return config;
 	}

@@ -29,24 +29,22 @@ public class VehiclesMapStore implements MapStore<Long, Vehicle>{
 
     @Override
     public void store(Long aLong, Vehicle vehicle) {
-        vehicleRepository.save(vehicle);
+        throw new UnsupportedOperationException("Changes to the data store should not be done via teh Cache");
     }
 
     @Override
     public void storeAll(Map<Long, Vehicle> map) {
-        vehicleRepository.save(map.values());
+        throw new UnsupportedOperationException("Changes to the data store should not be done via teh Cache");
     }
 
     @Override
     public void delete(Long aLong) {
-        Vehicle vehicle = load(aLong);
-        vehicleRepository.delete(vehicle);
+        throw new UnsupportedOperationException("Changes to the data store should not be done via teh Cache");
     }
 
     @Override
     public void deleteAll(Collection<Long> collection) {
-        List<Vehicle> vehicles = (List<Vehicle>) vehicleRepository.findAll(collection);
-        vehicleRepository.delete(vehicles);
+        throw new UnsupportedOperationException("Changes to the data store should not be done via teh Cache");
     }
 
     @Override
