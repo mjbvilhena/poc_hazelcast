@@ -5,5 +5,5 @@ package com.example.hazelcast.shared.map;
  */
 public interface MapNames {
 
-    String VIHICLES_MAP = "vehicles";
+    String VEHICLES_MAP = "vehicles";
 }

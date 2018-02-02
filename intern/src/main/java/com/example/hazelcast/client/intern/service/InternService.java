@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,7 +39,7 @@ public class InternService implements MapNames{
     @PostConstruct
     public void init(){
         //populated from storege Node App
-        vehiclesMap = hazelcastInstance.getMap(VIHICLES_MAP);
+        vehiclesMap = hazelcastInstance.getMap(VEHICLES_MAP);
     }
 
     /*populating MAP with DB values*/
@@ -49,7 +48,7 @@ public class InternService implements MapNames{
     public void populateMapFromDb(){
         System.out.println("### RUNNING SCHEDULED JOB Getting CDC Data ###");
 
-        vehiclesMap = hazelcastInstance.getMap(VIHICLES_MAP);
+        vehiclesMap = hazelcastInstance.getMap(VEHICLES_MAP);
         List<Cdc> list = cdcRepository.findAll();
         for (Cdc cdc : list){
             if(cdc.getProcessed_to_cache() == null){

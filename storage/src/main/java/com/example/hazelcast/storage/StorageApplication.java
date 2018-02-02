@@ -1,5 +1,6 @@
 package com.example.hazelcast.storage;
 
+import com.example.hazelcast.shared.map.MapNames;
 import com.example.hazelcast.storage.storage.VehiclesMapStore;
 import com.hazelcast.config.*;
 import com.hazelcast.core.Hazelcast;
@@ -28,6 +29,9 @@ public class StorageApplication {
     @Bean(destroyMethod = "shutdown")
     public HazelcastInstance createStorageInstance(@Qualifier("StorageConfig") Config config) throws Exception{
         HazelcastInstance instance = Hazelcast.newHazelcastInstance(config);
+
+        instance.getMap(MapNames.VEHICLES_MAP);
+
         return  instance;
     }
 
@@ -39,12 +43,12 @@ public class StorageApplication {
 
 		vehicleMapStoreConfig.setImplementation(vehiclesMapStore);
         vehicleMapStoreConfig.setWriteDelaySeconds(2);
-        vehicleMapStoreConfig.setInitialLoadMode(MapStoreConfig.InitialLoadMode.EAGER);
+
 
         MapConfig vehicleMapConfig = new MapConfig();
 
         vehicleMapConfig.setMapStoreConfig(vehicleMapStoreConfig);
-		vehicleMapConfig.setName("vehicles");
+		vehicleMapConfig.setName(MapNames.VEHICLES_MAP);
 		vehicleMapConfig.addMapIndexConfig(
 		        new MapIndexConfig("registrationDate",true)
         );
@@ -52,7 +56,11 @@ public class StorageApplication {
 		        new EntryListenerConfig(StorageEntryListener.class.getName(), false, false)
         );
 
+		vehicleMapConfig.setBackupCount(2);
+
 		config.addMapConfig(vehicleMapConfig);
+
+        vehiclesMapStore.loadAllKeys();
 
 		return config;
 	}

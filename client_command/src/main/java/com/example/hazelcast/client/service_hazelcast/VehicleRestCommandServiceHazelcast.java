@@ -28,7 +28,7 @@ public class VehicleRestCommandServiceHazelcast implements MapNames {
 
     @PostConstruct
     public void init(){
-       vehiclesMap = hazelcastInstance.getMap(VIHICLES_MAP);//populated from storege Node App
+       vehiclesMap = hazelcastInstance.getMap(VEHICLES_MAP);//populated from storege Node App
     }
 
     /*actions*/
@@ -47,7 +47,7 @@ public class VehicleRestCommandServiceHazelcast implements MapNames {
 //    public void populateMapFromDb(){
 //        System.out.println("### RUNNING SCHEDULED JOB ###");
 //
-//        vehiclesMap = hazelcastInstance.getMap(VIHICLES_MAP);
+//        vehiclesMap = hazelcastInstance.getMap(VEHICLES_MAP);
 //        List<Vehicle> vehicles = vehicleServiceClient.listAll();
 //        for (Vehicle vehicle : vehicles){
 //            Long key = vehicle.getVehicleId();
