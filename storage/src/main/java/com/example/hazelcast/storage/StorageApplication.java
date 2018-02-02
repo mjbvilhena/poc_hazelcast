@@ -1,18 +1,16 @@
 package com.example.hazelcast.storage;
 
 import com.example.hazelcast.storage.storage.VehiclesMapStore;
-import com.hazelcast.config.MapConfig;
-import com.hazelcast.config.MapIndexConfig;
-import com.hazelcast.config.MapStoreConfig;
+import com.hazelcast.config.*;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
-import com.hazelcast.config.Config;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 
@@ -21,30 +19,41 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class StorageApplication {
 
+    final static Logger logger = LoggerFactory.getLogger(StorageApplication.class);
+
 	public static void main(String[] args) {
 		SpringApplication.run(StorageApplication.class, args);
 	}
 
     @Bean(destroyMethod = "shutdown")
     public HazelcastInstance createStorageInstance(@Qualifier("StorageConfig") Config config) throws Exception{
-        return Hazelcast.newHazelcastInstance(config);
+        HazelcastInstance instance = Hazelcast.newHazelcastInstance(config);
+        return  instance;
     }
 
 	@Bean(name = "StorageConfig")
 	public Config config(VehiclesMapStore vehiclesMapStore) throws Exception {
 		Config config = new Config();
-		MapConfig vehicleMapConfig = new MapConfig();
+
 		MapStoreConfig vehicleMapStoreConfig = new MapStoreConfig();
+
 		vehicleMapStoreConfig.setImplementation(vehiclesMapStore);
         vehicleMapStoreConfig.setWriteDelaySeconds(2);
-		vehicleMapConfig.setMapStoreConfig(vehicleMapStoreConfig);
+        vehicleMapStoreConfig.setInitialLoadMode(MapStoreConfig.InitialLoadMode.EAGER);
+
+        MapConfig vehicleMapConfig = new MapConfig();
+
+        vehicleMapConfig.setMapStoreConfig(vehicleMapStoreConfig);
 		vehicleMapConfig.setName("vehicles");
+		vehicleMapConfig.addMapIndexConfig(
+		        new MapIndexConfig("registrationDate",true)
+        );
+		vehicleMapConfig.addEntryListenerConfig(
+		        new EntryListenerConfig(StorageEntryListener.class.getName(), false, false)
+        );
 
-		MapIndexConfig fieldIndex = new MapIndexConfig("registrationDate",true);
-		vehicleMapConfig.addMapIndexConfig(fieldIndex);
-
-		//add vehicles com.example.hazelcast.shared.map config to storage config
 		config.addMapConfig(vehicleMapConfig);
+
 		return config;
 	}
 }
