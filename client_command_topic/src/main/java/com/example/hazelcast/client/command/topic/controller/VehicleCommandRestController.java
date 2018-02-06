@@ -25,16 +25,16 @@ public class VehicleCommandRestController implements TopicNames{
 
     public void updateVehicle(Vehicle vehicle)throws Exception{
         HazelcastInstance client = HazelcastClient.getHazelcastClientByName("ClientCommandTopicInstance");
-
-        ITopic<String> topic = client.getTopic(VEHICLES_TOPIC);
-        topic.addMessageListener(new MessageListener<String>() {
+        final Vehicle[] vehicleMessage = {new Vehicle()};
+        ITopic<Vehicle> topic = client.getTopic(VEHICLES_TOPIC);
+        topic.addMessageListener(new MessageListener<Vehicle>() {
             @Override
-            public void onMessage(Message<String> message) {
-
+            public void onMessage(Message<Vehicle> message) {
+                vehicleMessage[0] = message.getMessageObject();
             }
         });
 
-        vehicleRestCommandServiceClient.updateVehicle(vehicle);
+        vehicleRestCommandServiceClient.updateVehicle(vehicleMessage[0]);
     }
 
     public void save(Vehicle vehicle) throws Exception {
