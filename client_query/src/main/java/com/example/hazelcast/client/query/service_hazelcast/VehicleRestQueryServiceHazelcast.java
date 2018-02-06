@@ -1,6 +1,5 @@
 package com.example.hazelcast.client.query.service_hazelcast;
 
-import com.example.hazelcast.client.query.service.VehicleRestQueryServiceClient;
 import com.example.hazelcast.shared.map.MapNames;
 import com.example.hazelcast.shared.model.Vehicle;
 import com.hazelcast.core.HazelcastInstance;
@@ -23,9 +22,6 @@ public class VehicleRestQueryServiceHazelcast implements MapNames {
     private IMap<Long, Vehicle> vehiclesMap;
 
     @Autowired
-    VehicleRestQueryServiceClient vehicleRestQueryServiceClient;
-
-    @Autowired
     public VehicleRestQueryServiceHazelcast(@Qualifier("ClientQueryInstance")HazelcastInstance hazelcastInstance){
         this.hazelcastInstance = hazelcastInstance;
     }
@@ -46,19 +42,5 @@ public class VehicleRestQueryServiceHazelcast implements MapNames {
         return vehiclesMap.values(sqlPredicate);
     }
 
-    /*populating MAP with DB values*/
-    //@Scheduled(cron = "*/2 * * * * *")//every 2 seconds
-//    @Scheduled(cron = "* */5 * * * *")//every 2 seconds
-//    public void populateMapFromDb(){
-//        System.out.println("### RUNNING SCHEDULED JOB ###");
-//
-//        vehiclesMap = hazelcastInstance.getMap(VEHICLES_MAP);
-//        List<Vehicle> vehicles = vehicleServiceClient.listAll();
-//        for (Vehicle vehicle : vehicles){
-//            Long key = vehicle.getVehicleId();
-//            vehiclesMap.put(key, vehicle);
-//        }
-//        System.out.println("### HAZELCAST MAP POPULATED FROM DATABASE ###");
-//    }
 
 }

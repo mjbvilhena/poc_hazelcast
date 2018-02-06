@@ -1,6 +1,4 @@
 package com.example.hazelcast.client.query.controller;
-
-import com.example.hazelcast.client.query.service.VehicleRestQueryServiceClient;
 import com.example.hazelcast.client.query.service_hazelcast.VehicleRestQueryServiceHazelcast;
 import com.example.hazelcast.shared.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +19,6 @@ import java.util.Collection;
 @RequestMapping(value="/api/vehicles")
 public class VehicleQueryRestController {
 
-    @Autowired
-    VehicleRestQueryServiceClient vehicleRestQueryServiceClient;
 
     @Autowired
     VehicleRestQueryServiceHazelcast vehicleRestQueryServiceHazelcast;

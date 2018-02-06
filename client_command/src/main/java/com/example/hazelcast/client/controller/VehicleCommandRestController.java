@@ -1,6 +1,7 @@
 package com.example.hazelcast.client.controller;
 
 import com.example.hazelcast.client.service.VehicleRestCommandServiceClient;
+import com.example.hazelcast.client.service_hazelcast_topic.VehicleRestCommandServiceHazelcastTopic;
 import com.example.hazelcast.shared.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,9 @@ public class VehicleCommandRestController {
     @Autowired
     VehicleRestCommandServiceClient vehicleRestCommandServiceClient;
 
+    @Autowired
+    VehicleRestCommandServiceHazelcastTopic vehicleRestCommandServiceHazelcastTopic;
+
     @DeleteMapping(value="/vehicle/{vehicleId}")
     public ResponseEntity<Void> deleteVehicle(@PathVariable("vehicleId")Long vehicleId){
         vehicleRestCommandServiceClient.deleteVehicle(vehicleId);
@@ -29,6 +33,7 @@ public class VehicleCommandRestController {
     @PutMapping(value = "/vehicle/{vehicleId}")
     public ResponseEntity<Void> updateVehicle(@RequestBody Vehicle vehicle, @PathVariable("vehicleId") Long vehicleId)throws Exception{
         vehicleRestCommandServiceClient.updateVehicle(vehicle);
+        //vehicleRestCommandServiceHazelcastTopic.saveOrUpdateVehicle(vehicle);
         return ResponseEntity.noContent().build();
     }
 

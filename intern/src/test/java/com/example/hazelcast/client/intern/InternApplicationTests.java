@@ -20,47 +20,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class InternApplicationTests {
 
-	@Autowired
-	VehicleRepositoryIntern vehicleRepositoryIntern;
-
-	private static Vehicle vehicle;
-	private static VehicleDetails vehicleDetails;
-	private static LocalDateTime currentDate;
-
-	@Before
-	public void init(){
-		vehicle = new Vehicle();
-		vehicleDetails = new VehicleDetails();
-		currentDate = LocalDateTime.now();
-	}
-
 	@Test
-	public void insertVehicleData() {
-
-	    vehicle = new Vehicle(currentDate, new VehicleDetails("1","KNIGHTFALL","SBT"));
-		vehicleRepositoryIntern.save(vehicle);
-
-        Vehicle vehicleFound = vehicleRepositoryIntern.findOne(vehicle.getVehicleId());
-        assertThat(vehicleFound.getVehicleId()).isEqualTo(vehicleFound.getVehicleId());
+	public void method() {
 
 	}
 
-    @Test
-    public void updateVehicleData() {
-	    List<Vehicle> list = vehicleRepositoryIntern.findAll();
-	    Long idVehicle = null;
-	    for(Vehicle v : list){
-	        vehicleDetails = new VehicleDetails("1","MARLYO34","BARDOBOLA");
-	        vehicleDetails.setVehicle(v);
-            v.setVehicleDetails(vehicleDetails);
-            vehicleRepositoryIntern.save(v);
-            idVehicle = v.getVehicleId();
-	        break;
-        }
-        Vehicle vehicle = vehicleRepositoryIntern.findOne(idVehicle);
-        Assert.assertEquals(vehicle.getVehicleDetails().getColour(), "MARLYO34");
-
-   }
 
 
 }

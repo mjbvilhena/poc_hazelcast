@@ -18,7 +18,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EntityScan("com.example.hazelcast.shared.model")
 @Configuration
-//@EnableScheduling
 public class ClientCommandApplication {
 
 	public static void main(String[] args) {
