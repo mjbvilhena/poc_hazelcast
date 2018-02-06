@@ -2,12 +2,12 @@
 
 -- DROP FUNCTION public.log_vehicle_changes();
 
-CREATE OR REPLACE FUNCTION public.log_vehicle_changes()
+CREATE FUNCTION public.log_vehicle_changes()
     RETURNS trigger
     LANGUAGE 'plpgsql'
     COST 100
     VOLATILE NOT LEAKPROOF
-
+    ROWS 0
 AS $BODY$
 
 DECLARE v_vehicle_id bigint;
@@ -15,14 +15,14 @@ DECLARE v_vehicle_id bigint;
 BEGIN
        IF TG_OP = 'INSERT' THEN
              v_vehicle_id := NEW.registration_number;
-             --raise exception '###LEVY: %',v_vehicle_id;
+             --raise exception '###TEST: %',v_vehicle_id;
              INSERT INTO public.cdc(id, action_description, db_date, processed_to_cache, table_description, vehicle_id, cdc_date)
                          VALUES (nextval('cdc_id_seq'),TG_OP, current_timestamp, NULL, TG_TABLE_NAME, v_vehicle_id, current_timestamp);
        END IF;
 
        IF TG_OP = 'DELETE' THEN
              v_vehicle_id := OLD.registration_number;
-             --raise exception '###LEVY: %',v_vehicle_id;
+             --raise exception '###TEST: %',v_vehicle_id;
              INSERT INTO public.cdc(id, action_description, db_date, processed_to_cache, table_description, vehicle_id, cdc_date)
                          VALUES (nextval('cdc_id_seq'),TG_OP, current_timestamp, NULL, TG_TABLE_NAME, v_vehicle_id, current_timestamp);
        END IF;
@@ -34,6 +34,7 @@ $BODY$;
 
 ALTER FUNCTION public.log_vehicle_changes()
     OWNER TO postgres;
+
 
 
 
