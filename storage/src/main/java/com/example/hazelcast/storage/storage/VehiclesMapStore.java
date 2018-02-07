@@ -29,22 +29,22 @@ public class VehiclesMapStore implements MapStore<Long, Vehicle>{
 
     @Override
     public void store(Long aLong, Vehicle vehicle) {
-        throw new UnsupportedOperationException("Changes to the data store should not be done via teh Cache");
+        //Nothing to do here. Changes to the data store should not be done via the Cache.
     }
 
     @Override
     public void storeAll(Map<Long, Vehicle> map) {
-        throw new UnsupportedOperationException("Changes to the data store should not be done via teh Cache");
+        //Nothing to do here. Changes to the data store should not be done via the Cache.
     }
 
     @Override
     public void delete(Long aLong) {
-        throw new UnsupportedOperationException("Changes to the data store should not be done via teh Cache");
+        //Nothing to do here. Changes to the data store should not be done via the Cache.
     }
 
     @Override
     public void deleteAll(Collection<Long> collection) {
-        throw new UnsupportedOperationException("Changes to the data store should not be done via teh Cache");
+        //Nothing to do here. Changes to the data store should not be done via the Cache.
     }
 
     @Override

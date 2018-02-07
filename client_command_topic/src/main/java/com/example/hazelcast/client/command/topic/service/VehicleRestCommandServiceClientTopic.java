@@ -20,7 +20,6 @@ public class VehicleRestCommandServiceClientTopic{
     /*If for some reason the names are not available (ex: no debug information),
      the parameter names are also available under the p<#arg> where #arg stands for the parameter index (starting from 0).
      https://stackoverflow.com/questions/14197359/spring-cache-abstraction-vs-interfaces-vs-key-param-null-key-returned-for-cach*/
-    @CachePut(value="vehiclesCache",key="#p0")
     public void updateVehicle(Vehicle vehicle)throws Exception{
         if(exist(vehicle)){
             vehicleRepositoryClientTopic.save(vehicle);
@@ -30,13 +29,11 @@ public class VehicleRestCommandServiceClientTopic{
 
     }
 
-    @CacheEvict(value="vehiclesCache",key="#p0")
     public void deleteVehicle(Long vehicleId) {
 
         vehicleRepositoryClientTopic.delete(vehicleId);
     }
 
-    @CachePut(value="vehiclesCache",key="#p0")
     public Vehicle save(Vehicle vehicle) throws Exception{
         return vehicleRepositoryClientTopic.save(vehicle);
     }

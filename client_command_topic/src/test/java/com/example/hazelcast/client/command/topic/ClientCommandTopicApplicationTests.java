@@ -33,7 +33,7 @@ public class ClientCommandTopicApplicationTests {
 		HazelcastInstance client = HazelcastClient.newHazelcastClient();
         CountDownLatch latch = new CountDownLatch(1);
         ListenerTopicTest listenerTopicTest = new ListenerTopicTest();
-		ITopic<Vehicle> topic = client.getTopic("Vehicle_Topic");
+		ITopic<Vehicle> topic = client.getTopic("test");
 		String message = topic.addMessageListener(listenerTopicTest);
 
         try{
