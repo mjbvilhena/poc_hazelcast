@@ -70,7 +70,12 @@
 			<version>2.7.0</version>
 			<scope>compile</scope>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.example.hazelcast.client.command.topic</groupId>
+            <artifactId>client_command_topic</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

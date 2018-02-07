@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * Created by netof on 11/01/2018.
  */
 @Repository
-public interface VehicleRepositoryClient extends JpaRepository<Vehicle, Long> {
+public interface VehicleRepositoryClientTopic extends JpaRepository<Vehicle, Long> {
 
 
 }

@@ -5,5 +5,8 @@ package com.example.hazelcast.shared.topic;
  */
 public interface TopicNames {
 
-    String VEHICLES_TOPIC = "vehiclesTopic";
+    String VEHICLES_TOPIC_SAVE = "vehiclesTopicSave";
+    String VEHICLES_TOPIC_UPDATE = "vehiclesTopicUpdate";
+    String VEHICLES_TOPIC_DELETE = "vehiclesTopicDelete";
+
 }

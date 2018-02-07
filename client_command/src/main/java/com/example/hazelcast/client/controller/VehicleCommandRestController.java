@@ -1,6 +1,5 @@
 package com.example.hazelcast.client.controller;
 
-import com.example.hazelcast.client.service.VehicleRestCommandServiceClient;
 import com.example.hazelcast.client.service_hazelcast_topic.VehicleRestCommandServiceHazelcastTopic;
 import com.example.hazelcast.shared.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,27 +18,23 @@ import java.net.URI;
 public class VehicleCommandRestController {
 
     @Autowired
-    VehicleRestCommandServiceClient vehicleRestCommandServiceClient;
-
-    @Autowired
     VehicleRestCommandServiceHazelcastTopic vehicleRestCommandServiceHazelcastTopic;
 
     @DeleteMapping(value="/vehicle/{vehicleId}")
-    public ResponseEntity<Void> deleteVehicle(@PathVariable("vehicleId")Long vehicleId){
-        vehicleRestCommandServiceClient.deleteVehicle(vehicleId);
+    public ResponseEntity<Void> deleteVehicle(@RequestBody Vehicle vehicle,@PathVariable("vehicleId")Long vehicleId){
+        vehicleRestCommandServiceHazelcastTopic.deleteVehicle(vehicle);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/vehicle/{vehicleId}")
     public ResponseEntity<Void> updateVehicle(@RequestBody Vehicle vehicle, @PathVariable("vehicleId") Long vehicleId)throws Exception{
-        vehicleRestCommandServiceClient.updateVehicle(vehicle);
-        //vehicleRestCommandServiceHazelcastTopic.saveOrUpdateVehicle(vehicle);
+        vehicleRestCommandServiceHazelcastTopic.updateVehicle(vehicle);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping
     public ResponseEntity<Void> save(@Valid @RequestBody Vehicle vehicle) throws Exception {
-        vehicle = vehicleRestCommandServiceClient.save(vehicle);
+        vehicleRestCommandServiceHazelcastTopic.saveVehicle(vehicle);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{vehicleId}").buildAndExpand(vehicle.getVehicleId()).toUri();
 

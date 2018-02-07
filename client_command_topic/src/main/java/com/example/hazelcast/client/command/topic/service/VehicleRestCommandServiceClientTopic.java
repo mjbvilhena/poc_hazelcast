@@ -1,23 +1,20 @@
-package com.example.hazelcast.client.service;
+package com.example.hazelcast.client.command.topic.service;
 
-import com.example.hazelcast.client.repository.VehicleRepositoryClient;
+import com.example.hazelcast.client.command.topic.repository.VehicleRepositoryClientTopic;
 import com.example.hazelcast.shared.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Created by netof on 11/01/2018.
  */
 @Service
-public class VehicleRestCommandServiceClient {
+public class VehicleRestCommandServiceClientTopic{
 
     @Autowired
-    private VehicleRepositoryClient vehicleRepositoryClient;
+    private VehicleRepositoryClientTopic vehicleRepositoryClientTopic;
 
 
     /*If for some reason the names are not available (ex: no debug information),
@@ -26,7 +23,7 @@ public class VehicleRestCommandServiceClient {
     @CachePut(value="vehiclesCache",key="#p0")
     public void updateVehicle(Vehicle vehicle)throws Exception{
         if(exist(vehicle)){
-            vehicleRepositoryClient.save(vehicle);
+            vehicleRepositoryClientTopic.save(vehicle);
         }else{
             throw new Exception("Vehicle not found!!!");
         };
@@ -36,24 +33,20 @@ public class VehicleRestCommandServiceClient {
     @CacheEvict(value="vehiclesCache",key="#p0")
     public void deleteVehicle(Long vehicleId) {
 
-        vehicleRepositoryClient.delete(vehicleId);
+        vehicleRepositoryClientTopic.delete(vehicleId);
     }
 
     @CachePut(value="vehiclesCache",key="#p0")
     public Vehicle save(Vehicle vehicle) throws Exception{
-        if(exist(vehicle)){
-            throw new Exception("Vehicle alrady in Database!!!");
-        }else{
-            return vehicleRepositoryClient.save(vehicle);
-        }
+        return vehicleRepositoryClientTopic.save(vehicle);
     }
 
     private boolean exist(Vehicle vehicle){
         boolean exist = false;
         try {
-            if(vehicleRepositoryClient.findOne(vehicle.getVehicleId()) != null){
+            if(vehicleRepositoryClientTopic.findOne(vehicle.getVehicleId()) != null){
                 exist  = true;
-            };
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

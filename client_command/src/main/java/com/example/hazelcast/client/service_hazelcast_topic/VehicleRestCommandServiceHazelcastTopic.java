@@ -1,6 +1,8 @@
 package com.example.hazelcast.client.service_hazelcast_topic;
 
 
+import com.example.hazelcast.client.command.topic.listener.ListenerTopic;
+import com.example.hazelcast.client.command.topic.service.VehicleRestCommandServiceClientTopic;
 import com.example.hazelcast.shared.model.Vehicle;
 import com.example.hazelcast.shared.topic.TopicNames;
 import com.hazelcast.core.HazelcastInstance;
@@ -18,8 +20,16 @@ import javax.annotation.PostConstruct;
 @Service
 public class VehicleRestCommandServiceHazelcastTopic implements TopicNames {
 
-    private ITopic<Vehicle> vehicleTopic = null;
+    private ITopic<Vehicle> vehicleTopicSave = null;
+    private ITopic<Vehicle> vehicleTopicUpdate = null;
+    private ITopic<Vehicle> vehicleTopicDelete = null;
+
     private HazelcastInstance hazelcastInstance;
+    private String message = "";
+
+    @Autowired
+    private ListenerTopic listenerTopic;
+
 
     @Autowired
     public VehicleRestCommandServiceHazelcastTopic(@Qualifier("ClientCommandInstance")HazelcastInstance hazelcastInstance){
@@ -28,12 +38,43 @@ public class VehicleRestCommandServiceHazelcastTopic implements TopicNames {
 
     @PostConstruct
     public void init() {
-        vehicleTopic = hazelcastInstance.getTopic(VEHICLES_TOPIC);
+
     }
 
-    public void saveOrUpdateVehicle(Vehicle vehicle)throws Exception{
-        vehicleTopic.publish(vehicle);
+    public void saveVehicle(Vehicle vehicle){
+        try{
+            vehicleTopicSave = hazelcastInstance.getTopic(VEHICLES_TOPIC_SAVE);
+            message = vehicleTopicSave.addMessageListener(listenerTopic);
+            vehicleTopicSave.publish(vehicle);
+        }finally {
+            if(null != message && null != vehicleTopicSave){
+                vehicleTopicSave.removeMessageListener(message);
+            }
+        }
+    }
 
+    public void updateVehicle(Vehicle vehicle){
+        try{
+            vehicleTopicUpdate = hazelcastInstance.getTopic(VEHICLES_TOPIC_UPDATE);
+            message = vehicleTopicUpdate.addMessageListener(listenerTopic);
+            vehicleTopicUpdate.publish(vehicle);
+        }finally {
+            if(null != message && null != vehicleTopicUpdate){
+                vehicleTopicUpdate.removeMessageListener(message);
+            }
+        }
+    }
+
+    public void deleteVehicle(Vehicle vehicle){
+        try{
+            vehicleTopicDelete = hazelcastInstance.getTopic(VEHICLES_TOPIC_DELETE);
+            message = vehicleTopicDelete.addMessageListener(listenerTopic);
+            vehicleTopicDelete.publish(vehicle);
+        }finally {
+            if(null != message && null != vehicleTopicDelete){
+                vehicleTopicDelete.removeMessageListener(message);
+            }
+        }
     }
 
 }
