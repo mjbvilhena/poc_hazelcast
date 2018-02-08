@@ -26,7 +26,7 @@ public class ListenerTopic implements MessageListener<Vehicle> {
             String topicName = String.valueOf(message.getSource());
             Vehicle vehicleFromMessage = message.getMessageObject();
 
-            logger.debug("New message for " + vehicleFromMessage.getVehicleId() + "on topic " + topicName);
+            logger.debug("New message for " + vehicleFromMessage.getVehicleId() + " on topic " + topicName);
             if("vehiclesTopicSave".equals(topicName)){
                 vehicleRestCommandServiceClientTopic.save(vehicleFromMessage);
             }
