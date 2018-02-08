@@ -2,7 +2,6 @@ package com.example.hazelcast.client.service_hazelcast_topic;
 
 
 import com.example.hazelcast.client.command.topic.listener.ListenerTopic;
-import com.example.hazelcast.client.command.topic.service.VehicleRestCommandServiceClientTopic;
 import com.example.hazelcast.shared.model.Vehicle;
 import com.example.hazelcast.shared.topic.TopicNames;
 import com.hazelcast.core.HazelcastInstance;
