@@ -47,9 +47,7 @@ public class VehicleRestCommandServiceHazelcastTopic implements TopicNames {
             message = vehicleTopicSave.addMessageListener(listenerTopic);
             vehicleTopicSave.publish(vehicle);
         }finally {
-            if(null != message && null != vehicleTopicSave){
-                vehicleTopicSave.removeMessageListener(message);
-            }
+            removeMessageListener(message,vehicleTopicSave);
         }
     }
 
@@ -59,9 +57,7 @@ public class VehicleRestCommandServiceHazelcastTopic implements TopicNames {
             message = vehicleTopicUpdate.addMessageListener(listenerTopic);
             vehicleTopicUpdate.publish(vehicle);
         }finally {
-            if(null != message && null != vehicleTopicUpdate){
-                vehicleTopicUpdate.removeMessageListener(message);
-            }
+            removeMessageListener(message,vehicleTopicUpdate);
         }
     }
 
@@ -71,9 +67,13 @@ public class VehicleRestCommandServiceHazelcastTopic implements TopicNames {
             message = vehicleTopicDelete.addMessageListener(listenerTopic);
             vehicleTopicDelete.publish(vehicle);
         }finally {
-            if(null != message && null != vehicleTopicDelete){
-                vehicleTopicDelete.removeMessageListener(message);
-            }
+            removeMessageListener(message,vehicleTopicDelete);
+        }
+    }
+
+    public void removeMessageListener(String message, ITopic<Vehicle> topic){
+        if(null != message && null != topic){
+            topic.removeMessageListener(message);
         }
     }
 
