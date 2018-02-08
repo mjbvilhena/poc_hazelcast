@@ -1,4 +1,4 @@
-package com.example.hazelcast.storage;
+package com.example.hazelcast.storage.listener;
 
 import com.hazelcast.core.EntryEvent;
 import com.hazelcast.core.EntryListener;

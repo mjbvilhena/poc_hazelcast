@@ -1,6 +1,7 @@
 package com.example.hazelcast.storage;
 
 import com.example.hazelcast.shared.map.MapNames;
+import com.example.hazelcast.storage.listener.StorageEntryListener;
 import com.example.hazelcast.storage.storage.VehiclesMapStore;
 import com.hazelcast.config.*;
 import com.hazelcast.core.Hazelcast;
