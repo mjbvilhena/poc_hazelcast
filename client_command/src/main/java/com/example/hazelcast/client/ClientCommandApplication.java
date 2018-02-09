@@ -19,7 +19,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
-@EntityScan("com.example.hazelcast.shared.model")
+@EntityScan("com.example.hazelcast.shared")
 @Configuration
 public class ClientCommandApplication {
 

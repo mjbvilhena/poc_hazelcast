@@ -1,6 +1,7 @@
 package com.example.hazelcast.client.command.topic;
 
 import com.example.hazelcast.client.command.topic.listener.ListenerTopic;
+import com.example.hazelcast.shared.interface_message.IVehicleMessage;
 import com.example.hazelcast.shared.model.Vehicle;
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
@@ -14,12 +15,10 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static com.example.hazelcast.shared.topic.TopicNames.VEHICLES_TOPIC_DELETE;
-import static com.example.hazelcast.shared.topic.TopicNames.VEHICLES_TOPIC_SAVE;
-import static com.example.hazelcast.shared.topic.TopicNames.VEHICLES_TOPIC_UPDATE;
+import static com.example.hazelcast.shared.topic.TopicNames.*;
 
 @SpringBootApplication
-@EntityScan("com.example.hazelcast.shared.model")
+@EntityScan("com.example.hazelcast.shared")
 @Configuration
 public class ClientCommandTopicApplication {
 
@@ -42,14 +41,9 @@ public class ClientCommandTopicApplication {
 	@Bean(name = "ClientCommandTopicInstance", destroyMethod = "shutdown")
 	public HazelcastInstance createClientInstance(ClientConfig clientConfig) throws Exception{
 		HazelcastInstance client = HazelcastClient.newHazelcastClient(clientConfig);
-		ITopic<Vehicle> vehicleTopicDelete = client.getTopic(VEHICLES_TOPIC_DELETE);
-		vehicleTopicDelete.addMessageListener(listenerTopic);
 
-		ITopic<Vehicle> vehicleTopicUpdate = client.getTopic(VEHICLES_TOPIC_UPDATE);
-		vehicleTopicUpdate.addMessageListener(listenerTopic);
-
-		ITopic<Vehicle> vehicleTopicSave = client.getTopic(VEHICLES_TOPIC_SAVE);
-		vehicleTopicSave.addMessageListener(listenerTopic);
+		ITopic<IVehicleMessage> vehicleTopic = client.getTopic(VEHICLES_TOPIC);
+		vehicleTopic.addMessageListener(listenerTopic);
 
 		return client;
 	}

@@ -13,6 +13,10 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -30,7 +34,7 @@ public class ClientQueryApplication {
 	}
 
 	@Bean
-	public ClientConfig clientConfig() throws Exception{
+	public ClientConfig clientConfig() throws Exception {
 		ClientConfig clientConfig = new ClientConfig();
 		ClientNetworkConfig clientNetworkConfig = clientConfig.getNetworkConfig();
 		clientNetworkConfig.setConnectionAttemptLimit(0);//unlimited, try to recconect
@@ -38,7 +42,7 @@ public class ClientQueryApplication {
 	}
 
 	@Bean(name = "ClientQueryInstance", destroyMethod = "shutdown")
-	public HazelcastInstance createClientInstance(ClientConfig clientConfig) throws Exception{
+	public HazelcastInstance createClientInstance(ClientConfig clientConfig) throws Exception {
 		return HazelcastClient.newHazelcastClient(clientConfig);
 	}
 
@@ -53,4 +57,5 @@ public class ClientQueryApplication {
 					.build();
 		}
 	}
+
 }

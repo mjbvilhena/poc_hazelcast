@@ -1,6 +1,10 @@
 package com.example.hazelcast.client.command.topic.listener;
 
 import com.example.hazelcast.client.command.topic.service.VehicleRestCommandServiceClientTopic;
+import com.example.hazelcast.shared.interface_message.IVehicleMessage;
+import com.example.hazelcast.shared.message.Impl.VehicleDeleteMessage;
+import com.example.hazelcast.shared.message.Impl.VehicleSaveMessage;
+import com.example.hazelcast.shared.message.Impl.VehicleUpdateMessage;
 import com.example.hazelcast.shared.model.Vehicle;
 import com.hazelcast.core.Message;
 import com.hazelcast.core.MessageListener;
@@ -14,32 +18,35 @@ import org.springframework.stereotype.Component;
  * Created by netof on 07/02/2018.
  */
 @Component
-public class ListenerTopic implements MessageListener<Vehicle> {
+public class ListenerTopic implements MessageListener<IVehicleMessage> {
     @Autowired
     VehicleRestCommandServiceClientTopic vehicleRestCommandServiceClientTopic;
 
     final static Logger logger = LoggerFactory.getLogger(ListenerTopic.class);
 
+
     @Override
-    public void onMessage(Message<Vehicle> message) {
+    public void onMessage(Message<IVehicleMessage> message) {
         try{
             String topicName = String.valueOf(message.getSource());
-            Vehicle vehicleFromMessage = message.getMessageObject();
+            IVehicleMessage vehicleFromMessage = message.getMessageObject();
 
-            logger.debug("New message for " + vehicleFromMessage.getVehicleId() + " on topic " + topicName);
-            if("vehiclesTopicSave".equals(topicName)){
-                vehicleRestCommandServiceClientTopic.save(vehicleFromMessage);
+            logger.debug("New message for " + vehicleFromMessage.getVehicle().getVehicleId() + " on topic " + topicName);
+
+            if(vehicleFromMessage instanceof VehicleUpdateMessage){
+                vehicleRestCommandServiceClientTopic.updateVehicle(vehicleFromMessage.getVehicle());
             }
-            if("vehiclesTopicUpdate".equals(topicName)){
-                vehicleRestCommandServiceClientTopic.updateVehicle(vehicleFromMessage);
+
+            if(vehicleFromMessage instanceof VehicleSaveMessage){
+                vehicleRestCommandServiceClientTopic.save(vehicleFromMessage.getVehicle());
             }
-            if("vehiclesTopicDelete".equals(topicName)){
-                vehicleRestCommandServiceClientTopic.deleteVehicle(vehicleFromMessage.getVehicleId());
+
+            if(vehicleFromMessage instanceof VehicleDeleteMessage){
+                vehicleRestCommandServiceClientTopic.deleteVehicle(vehicleFromMessage.getVehicle().getVehicleId());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
