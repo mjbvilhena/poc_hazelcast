@@ -47,10 +47,4 @@ public class VehicleRestCommandServiceHazelcastTopic implements TopicNames {
         vehicleTopicDelete.publish(vehicle);
     }
 
-    public void removeMessageListener(String message, ITopic<Vehicle> topic){
-        if(null != message && null != topic){
-            topic.removeMessageListener(message);
-        }
-    }
-
 }
