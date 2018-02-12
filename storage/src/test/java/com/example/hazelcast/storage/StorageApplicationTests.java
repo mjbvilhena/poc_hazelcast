@@ -22,14 +22,11 @@ public class StorageApplicationTests {
 	VehicleRepository vehicleRepository;
 
 	private static Vehicle vehicle;
-	private static VehicleDetails vehicleDetails;
 	private static Vehicle vehicleFound;
 	private static LocalDateTime currentDate;
 
 	@Before
 	public void init(){
-		vehicle = new Vehicle();
-		vehicleDetails = new VehicleDetails();
 		currentDate = LocalDateTime.now();
 	}
 
@@ -77,9 +74,6 @@ public class StorageApplicationTests {
 
 	public static void clearObject(){
 		vehicle = new Vehicle();
-		vehicleDetails = new VehicleDetails();
 	}
-
-
 }
 
