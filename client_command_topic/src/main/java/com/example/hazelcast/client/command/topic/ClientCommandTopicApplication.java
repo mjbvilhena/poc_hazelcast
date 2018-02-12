@@ -1,8 +1,7 @@
 package com.example.hazelcast.client.command.topic;
 
-import com.example.hazelcast.client.command.topic.listener.ListenerTopic;
+import com.example.hazelcast.client.command.topic.listener.VehicleTopicListener;
 import com.example.hazelcast.shared.interface_message.IVehicleMessage;
-import com.example.hazelcast.shared.model.Vehicle;
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.client.config.ClientNetworkConfig;
@@ -24,7 +23,7 @@ public class ClientCommandTopicApplication {
 
 
 	@Autowired
-	private ListenerTopic listenerTopic;
+	private VehicleTopicListener vehicleTopicListener;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ClientCommandTopicApplication.class, args);
@@ -43,7 +42,7 @@ public class ClientCommandTopicApplication {
 		HazelcastInstance client = HazelcastClient.newHazelcastClient(clientConfig);
 
 		ITopic<IVehicleMessage> vehicleTopic = client.getTopic(VEHICLES_TOPIC);
-		vehicleTopic.addMessageListener(listenerTopic);
+		vehicleTopic.addMessageListener(vehicleTopicListener);
 
 		return client;
 	}

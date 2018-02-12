@@ -9,14 +9,9 @@ import java.util.UUID;
 /**
  * Created by netof on 09/02/2018.
  */
-public class VehicleDeleteMessage implements Serializable,IVehicleMessage {
+public class VehicleDeleteMessage extends TopicQueueMessage implements Serializable,IVehicleMessage {
 
     private Vehicle vehicle;
-
-    @Override
-    public UUID getMessageId() {
-        return null;
-    }
 
     @Override
     public void setVehicle(Vehicle vehicle) {

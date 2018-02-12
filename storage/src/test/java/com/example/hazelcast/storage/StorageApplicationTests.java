@@ -75,23 +75,6 @@ public class StorageApplicationTests {
 
 	}
 
-//	@Test
-//	public void updateVehicleData() {
-//		List<Vehicle> list = vehicleRepository.findAll();
-//		Long idVehicle = null;
-//		for(Vehicle v : list){
-//			vehicleDetails = new VehicleDetails("1","MARLYO34","BARDOBOLA");
-//			vehicleDetails.setVehicle(v);
-//			v.setVehicleDetails(vehicleDetails);
-//			vehicleRepository.save(v);
-//			idVehicle = v.getVehicleId();
-//			break;
-//		}
-//		Vehicle vehicle = vehicleRepository.findOne(idVehicle);
-//		Assert.assertEquals(vehicle.getVehicleDetails().getColour(), "MARLYO34");
-//
-//	}
-
 	public static void clearObject(){
 		vehicle = new Vehicle();
 		vehicleDetails = new VehicleDetails();

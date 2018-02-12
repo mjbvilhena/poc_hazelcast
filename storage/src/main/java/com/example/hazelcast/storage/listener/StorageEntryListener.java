@@ -13,25 +13,25 @@ public class StorageEntryListener implements EntryListener {
     @Override
     public void entryAdded(EntryEvent entryEvent) {
         if(entryEvent.getMember().localMember())
-            logger.debug( "Entry Added: " + entryEvent.getName() + ":" +entryEvent.getKey() );
+            logger.debug( "Entry Added: " + entryEvent.getName() + ": " +entryEvent.getKey() );
     }
 
     @Override
     public void entryEvicted(EntryEvent entryEvent) {
         if(entryEvent.getMember().localMember())
-            logger.debug( "Entry Evicted:" + entryEvent.getName() + ":" +entryEvent.getKey() );
+            logger.debug( "Entry Evicted: " + entryEvent.getName() + ": " +entryEvent.getKey() );
     }
 
     @Override
     public void entryRemoved(EntryEvent entryEvent) {
         if(entryEvent.getMember().localMember())
-            logger.debug( "Entry Removed:" + entryEvent.getName() + ":" +entryEvent.getKey() );
+            logger.debug( "Entry Removed: " + entryEvent.getName() + ": " +entryEvent.getKey() );
     }
 
     @Override
     public void entryUpdated(EntryEvent entryEvent) {
         if(entryEvent.getMember().localMember())
-            logger.debug( "Entry Updated:" + entryEvent.getName() + ":" +entryEvent.getKey() );
+            logger.debug( "Entry Updated: " + entryEvent.getName() + ": " +entryEvent.getKey() );
     }
 
     @Override

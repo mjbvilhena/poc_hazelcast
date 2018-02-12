@@ -5,7 +5,6 @@ import com.example.hazelcast.shared.interface_message.IVehicleMessage;
 import com.example.hazelcast.shared.message.Impl.VehicleDeleteMessage;
 import com.example.hazelcast.shared.message.Impl.VehicleSaveMessage;
 import com.example.hazelcast.shared.message.Impl.VehicleUpdateMessage;
-import com.example.hazelcast.shared.model.Vehicle;
 import com.hazelcast.core.Message;
 import com.hazelcast.core.MessageListener;
 import org.slf4j.Logger;
@@ -18,11 +17,11 @@ import org.springframework.stereotype.Component;
  * Created by netof on 07/02/2018.
  */
 @Component
-public class ListenerTopic implements MessageListener<IVehicleMessage> {
+public class VehicleTopicListener implements MessageListener<IVehicleMessage> {
     @Autowired
     VehicleRestCommandServiceClientTopic vehicleRestCommandServiceClientTopic;
 
-    final static Logger logger = LoggerFactory.getLogger(ListenerTopic.class);
+    final static Logger logger = LoggerFactory.getLogger(VehicleTopicListener.class);
 
 
     @Override
@@ -31,7 +30,7 @@ public class ListenerTopic implements MessageListener<IVehicleMessage> {
             String topicName = String.valueOf(message.getSource());
             IVehicleMessage vehicleFromMessage = message.getMessageObject();
 
-            logger.debug("New message for " + vehicleFromMessage.getVehicle().getVehicleId() + " on topic " + topicName);
+            logger.debug("New message " + vehicleFromMessage.getId() + " created on " + vehicleFromMessage.getDataTime() + " for " + vehicleFromMessage.getVehicle().getVehicleId() + " on topic " + topicName);
 
             if(vehicleFromMessage instanceof VehicleUpdateMessage){
                 vehicleRestCommandServiceClientTopic.updateVehicle(vehicleFromMessage.getVehicle());
