@@ -17,7 +17,7 @@ Main Modules:
     
     Also partly implements Event Sourcing by deferring all changes to the underlying database to another module. 
     
-    This is done using assychronous messages and Hazelcast Topics
+    This is done using asynchronous messages and Hazelcast Topics
 
 4. Client_Command_Topic:
     
@@ -34,7 +34,7 @@ To summarize:
     All writes are done directly on the database, through the use of Topics, without interacting with the IMDG.
     All writes to the IMDG are done through the CDC module.
 
-How to load test data:
+How to create test data on the DB:
 
     Run the StorageApplicationTests.
 

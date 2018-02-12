@@ -40,37 +40,37 @@ public class StorageApplicationTests {
 		vehicle = new Vehicle(currentDate, new VehicleDetails("1","KNIGHTFALL","SBT"));
 		vehicleRepository.save(vehicle);
 		vehicleFound = vehicleRepository.findOne(vehicle.getVehicleId());
-		assertThat(vehicleFound.getVehicleId()).isEqualTo(vehicleFound.getVehicleId());
+		assertThat(vehicleFound.getVehicleId()).isEqualTo(vehicle.getVehicleId());
 		clearObject();
 
 		vehicle = new Vehicle(currentDate, new VehicleDetails("1","White","BMW"));
 		vehicleRepository.save(vehicle);
 		vehicleFound = vehicleRepository.findOne(vehicle.getVehicleId());
-		assertThat(vehicleFound.getVehicleId()).isEqualTo(vehicleFound.getVehicleId());
+		assertThat(vehicleFound.getVehicleId()).isEqualTo(vehicle.getVehicleId());
 		clearObject();
 
 		vehicle = new Vehicle(currentDate, new VehicleDetails("0","Black","Fiat"));
 		vehicleRepository.save(vehicle);
 		vehicleFound = vehicleRepository.findOne(vehicle.getVehicleId());
-		assertThat(vehicleFound.getVehicleId()).isEqualTo(vehicleFound.getVehicleId());
+		assertThat(vehicleFound.getVehicleId()).isEqualTo(vehicle.getVehicleId());
 		clearObject();
 
 		vehicle = new Vehicle(currentDate, new VehicleDetails("1","Green","VW"));
 		vehicleRepository.save(vehicle);
 		vehicleFound = vehicleRepository.findOne(vehicle.getVehicleId());
-		assertThat(vehicleFound.getVehicleId()).isEqualTo(vehicleFound.getVehicleId());
+		assertThat(vehicleFound.getVehicleId()).isEqualTo(vehicle.getVehicleId());
 		clearObject();
 
 		vehicle = new Vehicle(currentDate, new VehicleDetails("0","Red","Volvo"));
 		vehicleRepository.save(vehicle);
 		vehicleFound = vehicleRepository.findOne(vehicle.getVehicleId());
-		assertThat(vehicleFound.getVehicleId()).isEqualTo(vehicleFound.getVehicleId());
+		assertThat(vehicleFound.getVehicleId()).isEqualTo(vehicle.getVehicleId());
 		clearObject();
 
 		vehicle = new Vehicle(currentDate, new VehicleDetails("1","Purple","Kia"));
 		vehicleRepository.save(vehicle);
 		vehicleFound = vehicleRepository.findOne(vehicle.getVehicleId());
-		assertThat(vehicleFound.getVehicleId()).isEqualTo(vehicleFound.getVehicleId());
+		assertThat(vehicleFound.getVehicleId()).isEqualTo(vehicle.getVehicleId());
 		clearObject();
 
 	}
