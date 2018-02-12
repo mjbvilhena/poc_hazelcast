@@ -26,6 +26,7 @@ Main Modules:
 5. Intern:
 
     Leverages database-level bespoke Change Data Capture (CDC) to keep in synch the Hazelcast IMDG.
+    Scheduled task implemented with Spring Scheduler.
   
 To summarize: 
 
