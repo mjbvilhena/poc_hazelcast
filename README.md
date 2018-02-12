@@ -1,4 +1,3 @@
-# poc_module_hazelcast
 Poc Java API using Spring Framework 4 and Hazelcast
 
 
