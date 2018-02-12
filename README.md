@@ -42,3 +42,9 @@ How to run:
     Run all modules as how they are ordered above (1 to 5). 
     To run Hazelcast in Cluster Mode, just run multiple instances of the Storage module (but overrriding the server.port configuration for each instance).
 
+How to test:
+    
+    Use the Swagger UI to call the micro-services:
+     
+    localhost:8088/swagger-ui.html (client_command)
+    localhost:8089/swagger-ui.html (client_query)
